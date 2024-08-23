@@ -2,19 +2,15 @@
 
 NETWORK=${1:-LOCAL}
 CONTRACT_DIR="/local/eosnetworkfoundation/repos/eos-system-contracts/build/contracts"
-PUBLIC_SIG_KEY=EOS81nrWtjvMfDi9E7ddb5nbub2hBWWg6Kih7Y5oTuNPFv5mE72zN
 
-CHAIN_ID=5e07dcfb05b8ab92129dfcca73b4eabfc1601e0872b9288da60a65770805f1d2
 ENDPOINT=http://127.0.0.1:8888
 JUNGLE=https://jungle4.cryptolions.io:443
 
 if [ $NETWORK == "KYLIN" ]; then
-  CHAIN_ID=5fff1dae8dc8e2fc4d5b23b2c7665c97f9e9d8edf2b6485a86ba311c25639191
   ENDPOINT=https://api.kylin.alohaeos.com
 fi
 
 if [ $NETWORK == "MAINNET" ]; then
-  CHAIN_ID=aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906
   ENDPOINT=https://eos.api.eosnation.io
 fi
 

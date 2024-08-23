@@ -1,0 +1,7 @@
+
+- setup spaceranger1 account
+- get Private key for spaceranger1 to all to eosc vault
+- check allow permissions
+- make sure there is enough ram need 550Kb
+    - stake 100 EOS of CPU
+    - stake 100 EOS of Net
