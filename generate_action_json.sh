@@ -74,14 +74,8 @@ cp  ${CONTRACT_DIR}/start-shell-transaction.json ${CONTRACT_DIR}/SWITCH_TO_SVNN.
 printf '"actions": [' >> ${CONTRACT_DIR}/SWITCH_TO_SVNN.json
 # append actions with comma sep
 cat ${CONTRACT_DIR}/switchtosvnn.json | jq '.actions[]' >> ${CONTRACT_DIR}/SWITCH_TO_SVNN.json
-printf "," >> ${CONTRACT_DIR}/SWITCH_TO_SVNN.json
 rm ${CONTRACT_DIR}/switchtosvnn.json
 
-# add system contract set code action
-cat ${CONTRACT_DIR}/setcontract-eosio.system.json | jq '.actions[0]' >> ${CONTRACT_DIR}/SWITCH_TO_SVNN.json
-printf "," >> ${CONTRACT_DIR}/SWITCH_TO_SVNN.json
-# add system contract set abi action
-cat ${CONTRACT_DIR}/setcontract-eosio.system.json | jq '.actions[1]' >> ${CONTRACT_DIR}/SWITCH_TO_SVNN.json
 # close actions array
 echo '],' >> ${CONTRACT_DIR}/SWITCH_TO_SVNN.json
 # close our transaction
