@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 NETWORK=${1:-LOCAL}
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
@@ -19,7 +19,7 @@ fi
 
 ###############
 ## FIRST TRX
-## FEATURE ACTIVATIONS
+## spr1.feature
 ## SYS CONTRACT UPDATE
 ###############
 ## CREATE JSON TRANSACTIONS FOR FEATURE ACTIVATIONS
@@ -35,9 +35,7 @@ cleos --url $ENDPOINT push action eosio activate '["63320dd4a58212e4d32d1f58926b
 # SAVANNA
 cleos --url $ENDPOINT push action eosio activate '["cbe0fafc8fcc6cc998395e9b6de6ebd94644467b1b4a97ec126005df07013c52"]' -s -d \
     -p eosio@active --json-file ${ACTIONS_DIR}/activate-savanna.json --expiration 8640000
-# SET SYSTEM CONTRACT CODE AND ABI
-cleos --url $ENDPOINT set contract eosio ${EOS_CONTRACT_DIR}/eosio.system eosio.system.wasm eosio.system.abi -s -d \
-    -p eosio@active --json-file ${ACTIONS_DIR}/setcontract-eosio.system.json --expiration 8640000
+
 
 # CREATE EMPTY SHELL TRANSACTION THAT WILL HOLD OUR ACTIONS
 cat ${ACTIONS_DIR}/activate-disable-deferred-1-action.json | jq 'del(.actions)' | head -8 > ${ACTIONS_DIR}/start-shell-transaction.json
@@ -47,18 +45,33 @@ cat ${ACTIONS_DIR}/activate-disable-deferred-1-action.json | jq 'del(.actions)' 
 cp  ${ACTIONS_DIR}/start-shell-transaction.json ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
 # open actions array
 printf '"actions": [' >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
+
 # append actions with comma sep
-for file in activate-disable-deferred-1-action.json activate-disable-deferred-2-action.json activate-bls-primitives-2-action.json activate-savanna.json
-do
-  cat ${ACTIONS_DIR}/${file} | jq '.actions[]' >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
+if [ $NETWORK == "KYLIN" ]; then
+  cat ${ACTIONS_DIR}/activate-bls-primitives-2-action.json | jq '.actions[]' >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
   printf "," >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
-  rm ${ACTIONS_DIR}/${file}
-done
-# add system contract set code action
-cat ${ACTIONS_DIR}/setcontract-eosio.system.json | jq '.actions[0]' >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
-printf "," >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
-# add system contract set abi action
-cat ${ACTIONS_DIR}/setcontract-eosio.system.json | jq '.actions[1]' >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
+  rm ${ACTIONS_DIR}/activate-bls-primitives-2-action.json
+  rm ${ACTIONS_DIR}/activate-disable-deferred-1-action.json ${ACTIONS_DIR}/activate-disable-deferred-2-action.json
+fi
+
+if [ $NETWORK == "MAINNET" ]; then
+  for file in activate-disable-deferred-1-action.json activate-disable-deferred-2-action.json activate-bls-primitives-2-action.json
+  do
+    cat ${ACTIONS_DIR}/${file} | jq '.actions[]' >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
+    printf "," >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
+    rm ${ACTIONS_DIR}/${file}
+  done
+fi
+
+if [ $NETWORK == "LOCAL" ]; then
+  cat ${ACTIONS_DIR}/activate-bls-primitives-2-action.json | jq '.actions[]' >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
+  printf "," >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
+  rm ${ACTIONS_DIR}/activate-bls-primitives-2-action.json
+  rm ${ACTIONS_DIR}/activate-disable-deferred-1-action.json ${ACTIONS_DIR}/activate-disable-deferred-2-action.json
+fi
+
+# activate SAVANNA protocol feature to enable upgraded consensus
+cat ${ACTIONS_DIR}/activate-savanna.json | jq '.actions[]' >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
 # close actions array
 echo '],' >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
 # close our transaction
@@ -68,23 +81,19 @@ mv /tmp/pretty.json ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
 
 ###############
 ## SECOND TRX
+## spr2.contract
+## SET SYSTEM CONTRACT CODE AND ABI
+###############
+cleos --url $ENDPOINT set contract eosio ${EOS_CONTRACT_DIR}/eosio.system eosio.system.wasm eosio.system.abi -s -d \
+    -p eosio@active --json-file ${ACTIONS_DIR}/SETCONTRACT.json --expiration 8640000
+
+###############
+## THIRD TRX
+## spr2.switcht
 ## SWTICHTOSVNN
 ###############
-cleos --url $JUNGLE push action eosio switchtosvnn '{}' -s -d -p eosio@active --json-file ${ACTIONS_DIR}/switchtosvnn.json --expiration 8640000
-# using our shell create new transaction with many inline actions
-cp  ${ACTIONS_DIR}/start-shell-transaction.json ${ACTIONS_DIR}/SWITCH_TO_SVNN.json
-# open actions array
-printf '"actions": [' >> ${ACTIONS_DIR}/SWITCH_TO_SVNN.json
-# append actions with comma sep
-cat ${ACTIONS_DIR}/switchtosvnn.json | jq '.actions[]' >> ${ACTIONS_DIR}/SWITCH_TO_SVNN.json
-rm ${ACTIONS_DIR}/switchtosvnn.json
-
-# close actions array
-echo '],' >> ${ACTIONS_DIR}/SWITCH_TO_SVNN.json
-# close our transaction
-cat ${ACTIONS_DIR}/end-shell-transaction.json >> ${ACTIONS_DIR}/SWITCH_TO_SVNN.json
-cat ${ACTIONS_DIR}/SWITCH_TO_SVNN.json | jq > /tmp/pretty.json
-mv /tmp/pretty.json ${ACTIONS_DIR}/SWITCH_TO_SVNN.json
+cleos --url $JUNGLE push action eosio switchtosvnn '{}' -s -d \
+     -p eosio@active --json-file ${ACTIONS_DIR}/SWITCH_TO_SVNN.json --expiration 8640000
 
 # clean up files we don't need
-rm ${ACTIONS_DIR}/start-shell-transaction.json ${ACTIONS_DIR}/end-shell-transaction.json ${ACTIONS_DIR}/setcontract-eosio.system.json
+rm ${ACTIONS_DIR}/start-shell-transaction.json ${ACTIONS_DIR}/end-shell-transaction.json ${ACTIONS_DIR}/activate-savanna.json
