@@ -3,7 +3,7 @@
 cat ./eosio-wallet/finality-test-network-wallet.pw | cleos wallet unlock -n finality-test-network-wallet
 cat > $HOME/required_auth.json << EOF
 {
-  "threshold": 2,
+  "threshold": 3,
   "keys": [],
   "accounts": [
     {
