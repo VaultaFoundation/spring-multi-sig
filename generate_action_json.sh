@@ -89,11 +89,27 @@ cleos --url $ENDPOINT set contract eosio ${EOS_CONTRACT_DIR}/eosio.system eosio.
 
 ###############
 ## THIRD TRX
-## spr2.switcht
+## spr3.switcht
 ## SWTICHTOSVNN
 ###############
 cleos --url $JUNGLE push action eosio switchtosvnn '{}' -s -d \
-     -p eosio@active --json-file ${ACTIONS_DIR}/SWITCH_TO_SVNN.json --expiration 8640000
+     -p eosio@active --json-file ${ACTIONS_DIR}/switchtosvnn.json --expiration 8640000
+
+# using our shell create new transaction with many inline actions
+cp  ${ACTIONS_DIR}/start-shell-transaction.json ${ACTIONS_DIR}/SWITCH_TO_SVNN.json
+# open actions array
+printf '"actions": [' >> ${ACTIONS_DIR}/SWITCH_TO_SVNN.json
+
+# append actions
+cat ${ACTIONS_DIR}/switchtosvnn.json | jq '.actions[]' >> ${ACTIONS_DIR}/SWITCH_TO_SVNN.json
+rm ${ACTIONS_DIR}/switchtosvnn.json
+
+# close actions array
+echo '],' >> ${ACTIONS_DIR}/SWITCH_TO_SVNN.json
+# close our transaction
+cat ${ACTIONS_DIR}/end-shell-transaction.json >> ${ACTIONS_DIR}/SWITCH_TO_SVNN.json
+cat ${ACTIONS_DIR}/SWITCH_TO_SVNN.json | jq > /tmp/pretty.json
+mv /tmp/pretty.json ${ACTIONS_DIR}/SWITCH_TO_SVNN.json
 
 # clean up files we don't need
 rm ${ACTIONS_DIR}/start-shell-transaction.json ${ACTIONS_DIR}/end-shell-transaction.json ${ACTIONS_DIR}/activate-savanna.json
