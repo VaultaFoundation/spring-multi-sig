@@ -1,7 +1,0 @@
-error 2024-08-24T02:11:09.151 cleos     main.cpp:699                  print_result         ] soft_except->to_detail_string(): 3070003 wasm_serialization_error: Serialization Error Processing WASM
-env.set_finalizers unresolveable
-    {"module":"env","fn":"set_finalizers"}
-    nodeos  eos-vm.cpp:95 validate
-eosio <= eosio::setcode pending console output: 
-    {"console":"","account":"eosio","action":"setcode","receiver":"eosio"}
-    nodeos  apply_context.cpp:134 exec_one
