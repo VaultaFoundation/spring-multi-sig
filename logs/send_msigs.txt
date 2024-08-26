@@ -1,0 +1,147 @@
+Here are the keys that were ADDED during this operation (use `list` to see them all):
+- EOS81nrWtjvMfDi9E7ddb5nbub2hBWWg6Kih7Y5oTuNPFv5mE72zN
+Total keys stored: 1
+Adding no. 1: nationkylin1@active
+Adding no. 2: nationkylin2@active
+Adding no. 3: eosusacarte1@active
+Adding no. 4: eosusacartel@active
+Adding no. 5: newdexbptest@active
+Adding no. 6: eosphereiobp@active
+Adding no. 7: amsterdamkyl@active
+Adding no. 8: alohaeostes5@active
+Adding no. 9: alohaeostes4@active
+Adding no. 10: spherekylin1@active
+Adding no. 11: spherekylin3@active
+Adding no. 12: spherekylin2@active
+Skipping inactive no. 13: eoslaomaocom@active
+Adding no. 14: eosriobrazil@active
+Adding no. 15: eosiosg11111@active
+Adding no. 16: eosasia11111@active
+Adding no. 17: alohaeostest@active
+Adding no. 18: ivote4eosusa@active
+Skipping inactive no. 19: eosswedenorg@active
+Adding no. 20: eosnationftw@active
+Skipping inactive no. 21: eosargentina@active
+Adding no. 22: eoscannonkyn@active
+Adding no. 23: alohaeostes3@active
+Adding no. 24: alohaeostes2@active
+Skipping inactive no. 25: helloeoschbp@active
+Skipping inactive no. 26: cartel@active
+Adding no. 27: one.cartel@active
+Skipping inactive no. 28: eosiomeetone@active
+Adding no. 29: two.cartel@active
+Adding no. 30: realfly2mars@active
+Skipping inactive no. 31: eossv12eossv@active
+Skipping inactive no. 32: eosbeijingbp@active
+Skipping inactive no. 33: atticlabckbp@active
+Adding no. 34: okexnodetest@active
+Adding no. 35: bp.wal@active
+Adding no. 36: argentinapup@active
+Skipping inactive no. 37: eoshuobipool@active
+Skipping inactive no. 38: jedaaaaaaaaa@active
+Skipping inactive no. 39: eosstorebest@active
+Skipping inactive no. 40: eoscanadacom@active
+Adding no. 41: blockmatrix2@active
+Adding no. 42: superoneiobp@active
+Skipping inactive no. 43: eospaceioeos@active
+Adding no. 44: starteosiobp@active
+Enter passphrase to decrypt your vault: 
+
+Transaction submitted to the network.
+  https://kylin.eosq.app/tx/a40700b73c291fb3daf9a0dfbf2377c7efbea519c0dbbc29df61a0bee0693d9a
+Adding no. 1: nationkylin1@active
+Adding no. 2: nationkylin2@active
+Adding no. 3: eosusacarte1@active
+Adding no. 4: eosusacartel@active
+Adding no. 5: newdexbptest@active
+Adding no. 6: eosphereiobp@active
+Adding no. 7: amsterdamkyl@active
+Adding no. 8: alohaeostes5@active
+Adding no. 9: alohaeostes4@active
+Adding no. 10: spherekylin1@active
+Adding no. 11: spherekylin3@active
+Adding no. 12: spherekylin2@active
+Skipping inactive no. 13: eoslaomaocom@active
+Adding no. 14: eosriobrazil@active
+Adding no. 15: eosiosg11111@active
+Adding no. 16: eosasia11111@active
+Adding no. 17: alohaeostest@active
+Adding no. 18: ivote4eosusa@active
+Skipping inactive no. 19: eosswedenorg@active
+Adding no. 20: eosnationftw@active
+Skipping inactive no. 21: eosargentina@active
+Adding no. 22: eoscannonkyn@active
+Adding no. 23: alohaeostes3@active
+Adding no. 24: alohaeostes2@active
+Skipping inactive no. 25: helloeoschbp@active
+Skipping inactive no. 26: cartel@active
+Adding no. 27: one.cartel@active
+Skipping inactive no. 28: eosiomeetone@active
+Adding no. 29: two.cartel@active
+Adding no. 30: realfly2mars@active
+Skipping inactive no. 31: eossv12eossv@active
+Skipping inactive no. 32: eosbeijingbp@active
+Skipping inactive no. 33: atticlabckbp@active
+Adding no. 34: okexnodetest@active
+Adding no. 35: bp.wal@active
+Adding no. 36: argentinapup@active
+Skipping inactive no. 37: eoshuobipool@active
+Skipping inactive no. 38: jedaaaaaaaaa@active
+Skipping inactive no. 39: eosstorebest@active
+Skipping inactive no. 40: eoscanadacom@active
+Adding no. 41: blockmatrix2@active
+Adding no. 42: superoneiobp@active
+Skipping inactive no. 43: eospaceioeos@active
+Adding no. 44: starteosiobp@active
+Enter passphrase to decrypt your vault: 
+
+Transaction submitted to the network.
+  https://kylin.eosq.app/tx/8c166fd07f6438d4fc002770de9726114ddea79cc368780d6c759dfb423f5701
+Adding no. 1: nationkylin1@active
+Adding no. 2: nationkylin2@active
+Adding no. 3: eosusacarte1@active
+Adding no. 4: eosusacartel@active
+Adding no. 5: newdexbptest@active
+Adding no. 6: eosphereiobp@active
+Adding no. 7: amsterdamkyl@active
+Adding no. 8: alohaeostes5@active
+Adding no. 9: alohaeostes4@active
+Adding no. 10: spherekylin1@active
+Adding no. 11: spherekylin3@active
+Adding no. 12: spherekylin2@active
+Skipping inactive no. 13: eoslaomaocom@active
+Adding no. 14: eosriobrazil@active
+Adding no. 15: eosiosg11111@active
+Adding no. 16: eosasia11111@active
+Adding no. 17: alohaeostest@active
+Adding no. 18: ivote4eosusa@active
+Skipping inactive no. 19: eosswedenorg@active
+Adding no. 20: eosnationftw@active
+Skipping inactive no. 21: eosargentina@active
+Adding no. 22: eoscannonkyn@active
+Adding no. 23: alohaeostes3@active
+Adding no. 24: alohaeostes2@active
+Skipping inactive no. 25: helloeoschbp@active
+Skipping inactive no. 26: cartel@active
+Adding no. 27: one.cartel@active
+Skipping inactive no. 28: eosiomeetone@active
+Adding no. 29: two.cartel@active
+Adding no. 30: realfly2mars@active
+Skipping inactive no. 31: eossv12eossv@active
+Skipping inactive no. 32: eosbeijingbp@active
+Skipping inactive no. 33: atticlabckbp@active
+Adding no. 34: okexnodetest@active
+Adding no. 35: bp.wal@active
+Adding no. 36: argentinapup@active
+Skipping inactive no. 37: eoshuobipool@active
+Skipping inactive no. 38: jedaaaaaaaaa@active
+Skipping inactive no. 39: eosstorebest@active
+Skipping inactive no. 40: eoscanadacom@active
+Adding no. 41: blockmatrix2@active
+Adding no. 42: superoneiobp@active
+Skipping inactive no. 43: eospaceioeos@active
+Adding no. 44: starteosiobp@active
+Enter passphrase to decrypt your vault: 
+
+Transaction submitted to the network.
+  https://kylin.eosq.app/tx/59d6949029ecea0a2c60c1f5776fe39e187fb725208aaf677205ab75ed1afeea
