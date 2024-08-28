@@ -11,12 +11,13 @@ fi
 
 if [ $NETWORK == "MAINNET" ]; then
   ENDPOINT=https://eos.api.eosnation.io
+  ACCOUNT=enf.proposer
 fi
 
 if [ ! -f $HOME/eosio-wallet/.network-wallet.wallet ]; then
   cleos wallet create -n network-wallet --file $HOME/eosio-wallet/network-wallet.pw
   cleos wallet import -n network-wallet
-fi 
+fi
 cat $HOME/eosio-wallet/.network-wallet.pw | cleos wallet unlock -n network-wallet
 
 

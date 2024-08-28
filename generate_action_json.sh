@@ -16,6 +16,8 @@ fi
 if [ $NETWORK == "MAINNET" ]; then
   ENDPOINT=https://eos.api.eosnation.io
 fi
+#### time
+# cleos push action eosio.time checktime '["2022-09-07T00:00:00.000"]' -p eosio.time
 
 ###############
 ## FIRST TRX

@@ -20,6 +20,7 @@ fi
 
 if [ $NETWORK == "MAINNET" ]; then
   ENDPOINT=https://eos.api.eosnation.io
+  ACCOUNT=enf.proposer
 fi
 
 cd $HOME || exit
