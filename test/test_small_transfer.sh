@@ -31,7 +31,7 @@ if [ $NETWORK == "MAINNET" ]; then
 fi
 
 # specific date date -u -d "2030-01-01 00:00:00" +"%Y-%m-%dT%H:%M:%S.000"
-TIME=$(date -u -d "3 minutes" +"%Y-%m-%dT%H:%M:%S")
+TIME=$(date -u -d "2024-08-29 13:00:00" +"%Y-%m-%dT%H:%M:%S")
 cleos -u $ENDPOINT push action $TIME_ACT checktime "[\"${TIME}\"]" -p ${ACCOUNT}@active -s -d --json-file ${ACTIONS_DIR}/time.json --expiration 8640000
 
 cleos -u $ENDPOINT transfer $ACCOUNT $TO "0.001 EOS" "very small trx" -p ${ACCOUNT}@active -s -d --json-file ${ACTIONS_DIR}/verysmalltrans.json --expiration 8640000
