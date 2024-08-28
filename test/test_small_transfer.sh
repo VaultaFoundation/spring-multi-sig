@@ -13,26 +13,28 @@ ENDPOINT=http://127.0.0.1:8888
 ACCOUNT=spaceranger1
 TO=bpa
 REQUEST="enf.signator"
+TIME_ACT="eosio.time"
 
 if [ $NETWORK == "KYLIN" ]; then
   ENDPOINT=https://api.kylin.alohaeos.com
   ACCOUNT=spacerang.gm
   TO=ivote4eosusa
   REQUEST=kylinsignora
+  TIME_ACT="time.eosn"
 fi
 
 if [ $NETWORK == "MAINNET" ]; then
   ENDPOINT=https://eos.api.eosnation.io
   ACCOUNT=enf.proposer
   TO=ivote4eosusa
+  TIME_ACT="time.eosn"
 fi
 
 # specific date date -u -d "2030-01-01 00:00:00" +"%Y-%m-%dT%H:%M:%S.000"
 TIME=$(date -u -d "3 minutes" +"%Y-%m-%dT%H:%M:%S")
-cleos push action eosio.time checktime "[\"${TIME}\"]" -p ${ACCOUNT}@active -s -d --json-file ${ACTIONS_DIR}/time.json --expiration 8640000
+cleos -u $ENDPOINT push action $TIME_ACT checktime "[\"${TIME}\"]" -p ${ACCOUNT}@active -s -d --json-file ${ACTIONS_DIR}/time.json --expiration 8640000
 
-
-cleos transfer $ACCOUNT $TO "0.001 EOS" "very small trx" -p ${ACCOUNT}@active -s -d --json-file ${ACTIONS_DIR}/verysmalltrans.json --expiration 8640000
+cleos -u $ENDPOINT transfer $ACCOUNT $TO "0.001 EOS" "very small trx" -p ${ACCOUNT}@active -s -d --json-file ${ACTIONS_DIR}/verysmalltrans.json --expiration 8640000
 if [ $WITHTIME == "YES" ]; then
   cat ${ACTIONS_DIR}/verysmalltrans.json | jq 'del(.actions)' | head -8 > ${ACTIONS_DIR}/test-start-shell-transaction.json
   cat ${ACTIONS_DIR}/verysmalltrans.json | jq 'del(.actions)' | tail -4 > ${ACTIONS_DIR}/test-end-shell-transaction.json
@@ -40,9 +42,9 @@ if [ $WITHTIME == "YES" ]; then
   cp  ${ACTIONS_DIR}/test-start-shell-transaction.json ${ACTIONS_DIR}/TEST.json
   # open actions array
   printf '"actions": [' >> ${ACTIONS_DIR}/TEST.json
-  cat $ACTIONS_DIR/time.json | jq .actions[] >> ${ACTIONS_DIR}/TEST.json
+  cat $ACTIONS_DIR/time.json | jq ".actions[]" >> ${ACTIONS_DIR}/TEST.json
   printf "," >> ${ACTIONS_DIR}/TEST.json
-  cat $ACTIONS_DIR/verysmalltrans.json | jq .actions[] >> ${ACTIONS_DIR}/TEST.json
+  cat $ACTIONS_DIR/verysmalltrans.json | jq ".actions[]" >> ${ACTIONS_DIR}/TEST.json
   # close actions array
   echo '],' >> ${ACTIONS_DIR}/TEST.json
   # close our transaction
