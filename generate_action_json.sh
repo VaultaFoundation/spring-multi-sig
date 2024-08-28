@@ -9,13 +9,16 @@ EOS_CONTRACT_DIR=/local/eosnetworkfoundation/repos/eos-system-contracts/build/co
 
 ENDPOINT=http://127.0.0.1:8888
 JUNGLE=https://jungle4.cryptolions.io:443
+TIME_ACT="eosio.time"
 
 if [ $NETWORK == "KYLIN" ]; then
   ENDPOINT=https://api.kylin.alohaeos.com
+  TIME_ACT="time.eosn"
 fi
 
 if [ $NETWORK == "MAINNET" ]; then
   ENDPOINT=https://eos.api.eosnation.io
+  TIME_ACT="time.eosn"
 fi
 
 ###############
