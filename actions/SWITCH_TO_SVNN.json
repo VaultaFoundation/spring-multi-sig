@@ -1,7 +1,7 @@
 {
-  "expiration": "2024-12-04T14:09:00",
-  "ref_block_num": 18095,
-  "ref_block_prefix": 1145146499,
+  "expiration": "2024-12-08T14:47:14",
+  "ref_block_num": 55872,
+  "ref_block_prefix": 1562231744,
   "max_net_usage_words": 0,
   "max_cpu_usage_ms": 0,
   "delay_sec": 0,
