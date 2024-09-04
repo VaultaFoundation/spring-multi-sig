@@ -1,5 +1,19 @@
 #!/bin/env bash
 
-cleos system newaccount eosio spaceranger1 EOS81nrWtjvMfDi9E7ddb5nbub2hBWWg6Kih7Y5oTuNPFv5mE72zN EOS81nrWtjvMfDi9E7ddb5nbub2hBWWg6Kih7Y5oTuNPFv5mE72zN --stake-net "1000.0 EOS" --stake-cpu "1000.0 EOS" --buy-ram-kbytes 1000
+CREATOR=eosio
+ACCOUNT=spaceranger1
+ENDPOINT=http://127.0.0.1:8888
 
-#npx @wharfkit/cli account -n spacerang.gm -k PUB_K1_81nrWtjvMfDi9E7ddb5nbub2hBWWg6Kih7Y5oTuNPFv5mE72zN -c KylinTestnet
+PUB_KEY=$(grep Public ~/eosio-wallet/${ACCOUNT}.keys | cut -d: -f2 | sed 's/\s//')
+cleos -u $ENDPOINT system newaccount $CREATOR $ACCOUNT \
+  $PUB_KEY $PUB_KEY --stake-net "1000.0 EOS" --stake-cpu "1000.0 EOS" --buy-ram-kbytes 1000
+
+ACCOUNT=enf.signator
+PUB_KEY=$(grep Public ~/eosio-wallet/${ACCOUNT}.keys | cut -d: -f2 | sed 's/\s//')
+cleos -u $ENDPOINT system newaccount $CREATOR $ACCOUNT \
+  $PUB_KEY $PUB_KEY --stake-net "1000.0 EOS" --stake-cpu "1000.0 EOS" --buy-ram-kbytes 1000
+
+ACCOUNT=enf.proposer
+PUB_KEY=$(grep Public ~/eosio-wallet/${ACCOUNT}.keys | cut -d: -f2 | sed 's/\s//')
+cleos -u $ENDPOINT system newaccount $CREATOR $ACCOUNT \
+  $PUB_KEY $PUB_KEY --stake-net "1000.0 EOS" --stake-cpu "1000.0 EOS" --buy-ram-kbytes 1000

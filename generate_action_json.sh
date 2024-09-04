@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 NETWORK=${1:-LOCAL}
+TIME=${2:-"3 minutes"}
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 ACTIONS_DIR="${SCRIPT_DIR}/actions"
 [ ! -d $ACTIONS_DIR ] && mkdir -p $ACTIONS_DIR
@@ -8,13 +9,16 @@ EOS_CONTRACT_DIR=/local/eosnetworkfoundation/repos/eos-system-contracts/build/co
 
 ENDPOINT=http://127.0.0.1:8888
 JUNGLE=https://jungle4.cryptolions.io:443
+TIME_ACT="eosio.time"
 
 if [ $NETWORK == "KYLIN" ]; then
   ENDPOINT=https://api.kylin.alohaeos.com
+  TIME_ACT="time.eosn"
 fi
 
 if [ $NETWORK == "MAINNET" ]; then
   ENDPOINT=https://eos.api.eosnation.io
+  TIME_ACT="time.eosn"
 fi
 
 ###############
@@ -23,6 +27,10 @@ fi
 ## SYS CONTRACT UPDATE
 ###############
 ## CREATE JSON TRANSACTIONS FOR FEATURE ACTIVATIONS
+# specific date date -u -d "2030-01-01 00:00:00" +"%Y-%m-%dT%H:%M:%S.000"
+TIME=$(date -u -d "${TIME}" +"%Y-%m-%dT%H:%M:%S")
+cleos -u $ENDPOINT push action $TIME_ACT checktime "[\"${TIME}\"]" -p eosio@active -s -d --json-file ${ACTIONS_DIR}/time.json --expiration 8640000
+
 # DISABLE_DEFERRED_TRXS_STAGE_1
 cleos --url $ENDPOINT push action eosio activate '["fce57d2331667353a0eac6b4209b67b843a7262a848af0a49a6e2fa9f6584eb4"]' -s -d \
     -p eosio@active --json-file ${ACTIONS_DIR}/activate-disable-deferred-1-action.json --expiration 8640000
@@ -48,14 +56,17 @@ printf '"actions": [' >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
 
 # append actions with comma sep
 if [ $NETWORK == "KYLIN" ]; then
-  cat ${ACTIONS_DIR}/activate-bls-primitives-2-action.json | jq '.actions[]' >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
-  printf "," >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
-  rm ${ACTIONS_DIR}/activate-bls-primitives-2-action.json
+  for file in time.json activate-bls-primitives-2-action.json
+  do
+    cat ${ACTIONS_DIR}/${file} | jq '.actions[]' >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
+    printf "," >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
+    rm ${ACTIONS_DIR}/${file}
+  done
   rm ${ACTIONS_DIR}/activate-disable-deferred-1-action.json ${ACTIONS_DIR}/activate-disable-deferred-2-action.json
 fi
 
 if [ $NETWORK == "MAINNET" ]; then
-  for file in activate-disable-deferred-1-action.json activate-disable-deferred-2-action.json activate-bls-primitives-2-action.json
+  for file in time.json activate-disable-deferred-1-action.json activate-disable-deferred-2-action.json activate-bls-primitives-2-action.json
   do
     cat ${ACTIONS_DIR}/${file} | jq '.actions[]' >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
     printf "," >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
@@ -64,9 +75,12 @@ if [ $NETWORK == "MAINNET" ]; then
 fi
 
 if [ $NETWORK == "LOCAL" ]; then
-  cat ${ACTIONS_DIR}/activate-bls-primitives-2-action.json | jq '.actions[]' >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
-  printf "," >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
-  rm ${ACTIONS_DIR}/activate-bls-primitives-2-action.json
+  for file in time.json activate-bls-primitives-2-action.json
+  do
+    cat ${ACTIONS_DIR}/${file} | jq '.actions[]' >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
+    printf "," >> ${ACTIONS_DIR}/PREPARE_SAVANNA_ACTIONS.json
+    rm ${ACTIONS_DIR}/${file}
+  done
   rm ${ACTIONS_DIR}/activate-disable-deferred-1-action.json ${ACTIONS_DIR}/activate-disable-deferred-2-action.json
 fi
 
