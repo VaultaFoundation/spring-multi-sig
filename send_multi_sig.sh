@@ -12,6 +12,11 @@ fi
 ENDPOINT=http://127.0.0.1:8888
 ACCOUNT=spaceranger1
 
+if [ $NETWORK == "JUNGLE" ]; then
+  ENDPOINT=https://jungle4.cryptolions.io:443
+  ACCOUNT=hokieshokies 
+fi
+
 if [ $NETWORK == "KYLIN" ]; then
   ENDPOINT=https://api.kylin.alohaeos.com
   ACCOUNT=spacerang.gm
