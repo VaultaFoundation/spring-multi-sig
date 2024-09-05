@@ -63,14 +63,19 @@ cat > ./${PROPER_NAME}_owner_auth.json << EOF
 EOF
 OWNER_AUTH_JSON=$(cat ./${PROPER_NAME}_owner_auth.json)
 
-
 cleos -u $ENDPOINT system newaccount $CREATOR $ACCOUNT \
-"${OWNER_AUTH_JSON}" "${ACTIVE_AUTH_JSON}" --stake-net "100.00 EOS" --stake-cpu "100.00 EOS" --buy-ram-kbytes 1000 \
+"${OWNER_AUTH_JSON}" "${ACTIVE_AUTH_JSON}" --stake-net "0.0 EOS" --stake-cpu "0.0 EOS" --buy-ram-kbytes 1000 \
 -p ${CREATOR}@active -s -d --json-file ./CREATE_${PROPER_NAME}_ENF_USER.json --expiration 8640000
 
-cat ./CREATE_${PROPER_NAME}_ENF_USER.json | jq > /tmp/pretty.json
+cleos -u $ENDPOINT transfer $CREATOR $ACCOUNT "50 EOS" "transfer for powerup" \
+-p ${CREATOR}@active -s -d --json-file ./FUNDING_${PROPER_NAME}.json --expiration 8640000
+TRANS_ACTION=$(jq '.actions[]' ./FUNDING_${PROPER_NAME}.json)
+
+jq ".actions[2] += ${TRANS_ACTION}" ./CREATE_${PROPER_NAME}_ENF_USER.json > /tmp/pretty.json
+
 mv /tmp/pretty.json ./CREATE_${PROPER_NAME}_ENF_USER.json
 
-eosc -u $ENDPOINT multisig propose $MSIG_PROP_ACCOUNT createprusera \
+eosc -u $ENDPOINT multisig propose $MSIG_PROP_ACCOUNT createenfusr \
     ./CREATE_${PROPER_NAME}_ENF_USER.json \
-    --request enf --vault-file $HOME/eosio-wallet/.eosc-vault-${MSIG_PROP_ACCOUNT}.json
+    --request admin1.enf --request admin2.enf --request admin3.enf --request admin4.enf \
+    --vault-file $HOME/eosio-wallet/.eosc-vault-${MSIG_PROP_ACCOUNT}.json
