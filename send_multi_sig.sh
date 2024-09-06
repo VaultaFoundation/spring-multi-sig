@@ -14,7 +14,7 @@ ACCOUNT=spaceranger1
 
 if [ $NETWORK == "JUNGLE" ]; then
   ENDPOINT=https://jungle4.cryptolions.io:443
-  ACCOUNT=hokieshokies 
+  ACCOUNT=hokieshokies
 fi
 
 if [ $NETWORK == "KYLIN" ]; then
