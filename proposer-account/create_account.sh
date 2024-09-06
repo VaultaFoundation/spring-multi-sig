@@ -69,7 +69,7 @@ cleos -u $ENDPOINT system newaccount $CREATOR $ACCOUNT \
 
 cleos -u $ENDPOINT transfer $CREATOR $ACCOUNT "50 EOS" "transfer for powerup" \
 -p ${CREATOR}@active -s -d --json-file ./FUNDING_${PROPER_NAME}.json --expiration 8640000
-TRANS_ACTION=$(jq '.actions[]' ./FUNDING_${PROPER_NAME}.json)
+TRANS_ACTION=$(jq '.actions[0]' ./FUNDING_${PROPER_NAME}.json)
 
 jq ".actions[2] += ${TRANS_ACTION}" ./CREATE_${PROPER_NAME}_ENF_USER.json > /tmp/pretty.json
 
