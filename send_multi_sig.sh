@@ -24,7 +24,7 @@ fi
 
 if [ $NETWORK == "MAINNET" ]; then
   ENDPOINT=https://eos.api.eosnation.io
-  ACCOUNT=enf.proposer
+  ACCOUNT=proposer.enf
 fi
 
 if [ $DO_SWITCH != "YES" ]; then

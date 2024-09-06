@@ -109,6 +109,11 @@ cleos --url $ENDPOINT set contract eosio ${EOS_CONTRACT_DIR}/eosio.system eosio.
 cleos --url $JUNGLE push action eosio switchtosvnn '{}' -s -d \
      -p eosio@active --json-file ${ACTIONS_DIR}/switchtosvnn.json --expiration 8640000
 
+## CREATE JSON TRANSACTIONS FOR FEATURE ACTIVATIONS
+# specific date date -u -d "2030-01-01 00:00:00" +"%Y-%m-%dT%H:%M:%S.000"
+TIME=$(date -u -d "${TIME}" +"%Y-%m-%dT%H:%M:%S")
+cleos -u $ENDPOINT push action $TIME_ACT checktime "[\"${TIME}\"]" -p eosio@active -s -d --json-file ${ACTIONS_DIR}/time.json --expiration 8640000
+
 cp ${ACTIONS_DIR}/time.json ${ACTIONS_DIR}/SWITCH_TO_SVNN.json
 SWITCH_ACTION=$(jq '.actions[0]' ${ACTIONS_DIR}/switchtosvnn.json)
 jq ".actions[0] += ${SWITCH_ACTION}" ${ACTIONS_DIR}/SWITCH_TO_SVNN.json > /tmp/pretty.json
