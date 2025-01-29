@@ -2,7 +2,7 @@
 
 cat ~/eosio-wallet/finality-test-network-wallet.pw | cleos wallet unlock -n finality-test-network-wallet
 ACCOUNT=spaceranger1
-SIG=${1:-enfsys.ric}
+SIG=${1:-enfsys.erm}
 # spr2.contrac
 # spr3.switcht
 cleos multisig approve $ACCOUNT $SIG '{"actor": "bpa", "permission": "active"}' -p bpa@active
