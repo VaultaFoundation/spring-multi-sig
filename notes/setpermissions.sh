@@ -46,7 +46,7 @@ cat > $HOME/required_auth2.json << EOF
   "accounts": [
     {
       "permission": {
-        "actor": "enf.signator",
+        "actor": "spaceranger1",
         "permission": "active"
       },
       "weight": 1

@@ -20,8 +20,4 @@ if [ ! -f $HOME/eosio-wallet/.network-wallet.wallet ]; then
 fi
 cat $HOME/eosio-wallet/.network-wallet.pw | cleos wallet unlock -n network-wallet
 
-
-
-cleos --url $ENDPOINT multisig cancel $ACCOUNT spr1.feature $ACCOUNT
-cleos --url $ENDPOINT multisig cancel $ACCOUNT spr2.contrac $ACCOUNT
-cleos --url $ENDPOINT multisig cancel $ACCOUNT spr3.switcht $ACCOUNT
+cleos --url $ENDPOINT multisig cancel $ACCOUNT enfsys.ric $ACCOUNT
