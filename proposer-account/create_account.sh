@@ -6,28 +6,32 @@ PROPER_NAME=$(echo $ACCOUNT | cut -d'.' -f1)
 ENDPOINT=http://127.0.0.1:8888
 MSIG_PROP_ACCOUNT=spaceranger1
 NETWORK=${1:-LOCAL}
+PUB_KEY=$(grep Public $HOME/eosio-wallet/${ACCOUNT}-local.keys | cut -d: -f2 | sed 's/\s//')
 
 if [ $NETWORK == "JUNGLE" ]; then
   ENDPOINT=https://jungle4.cryptolions.io:443
   MSIG_PROP_ACCOUNT=hokieshokies
+  KEYS=$HOME/eosio-wallet/${ACCOUNT}-jungle.keys
 fi
 
 if [ $NETWORK == "KYLIN" ]; then
   ENDPOINT=https://api.kylin.alohaeos.com
   MSIG_PROP_ACCOUNT=spacerang.gm
+  $HOME/eosio-wallet/${ACCOUNT}-kylin.keys
 fi
 
 if [ $NETWORK == "MAINNET" ]; then
   ENDPOINT=https://eos.api.eosnation.io
   MSIG_PROP_ACCOUNT=ericpassmore
+  $HOME/eosio-wallet/${ACCOUNT}.keys
 fi
 
-if [ ! -s $HOME/eosio-wallet/${ACCOUNT}.keys ]; then
-  echo "Can not find $HOME/eosio-wallet/${ACCOUNT}.keys"
+if [ ! -s $KEYS ]; then
+  echo "Can not find $KEYS"
   exit
 fi
 
-PUB_KEY=$(grep Public $HOME/eosio-wallet/${ACCOUNT}.keys | cut -d: -f2 | sed 's/\s//')
+PUB_KEY=$(grep Public $KEYS | cut -d: -f2 | sed 's/\s//')
 cat > ./${PROPER_NAME}_active_auth.json << EOF
 {
     "threshold": 1,
@@ -67,7 +71,7 @@ cleos -u $ENDPOINT system newaccount $CREATOR $ACCOUNT \
 "${OWNER_AUTH_JSON}" "${ACTIVE_AUTH_JSON}" --stake-net "0.0 EOS" --stake-cpu "0.0 EOS" --buy-ram-kbytes 1000 \
 -p ${CREATOR}@active -s -d --json-file ./CREATE_${PROPER_NAME}_ENF_USER.json --expiration 8640000
 
-cleos -u $ENDPOINT transfer $CREATOR $ACCOUNT "50 EOS" "transfer for powerup" \
+cleos -u $ENDPOINT transfer $CREATOR $ACCOUNT "3 EOS" "transfer for powerup" \
 -p ${CREATOR}@active -s -d --json-file ./FUNDING_${PROPER_NAME}.json --expiration 8640000
 TRANS_ACTION=$(jq '.actions[0]' ./FUNDING_${PROPER_NAME}.json)
 
