@@ -30,17 +30,17 @@ if [ ! -s $HOME/eosio-wallet/.eosc-vault-${ACCOUNT}.json ]; then
     eosc vault create --vault-file $HOME/eosio-wallet/.eosc-vault-${ACCOUNT}.json --import
 fi
 
-if [ ! -s ${ACTIONS_DIR}/EOSIO_SYSTEM_v3.7.0.JSON ]; then
-    echo "ERROR: failed to find ${ACTIONS_DIR}/EOSIO_SYSTEM_v3.7.0.JSON EXITING"
+if [ ! -s ${ACTIONS_DIR}/TIME_CHECK_EOSIO_SYSTEM_v3.7.0.JSON ]; then
+    echo "ERROR: failed to find ${ACTIONS_DIR}/TIME_CHECK_EOSIO_SYSTEM_v3.7.0.JSON EXITING"
     exit
 fi
 # Error check on JSON 
-cat ${ACTIONS_DIR}/EOSIO_SYSTEM_v3.7.0.JSON | jq 1> /dev/null
+cat ${ACTIONS_DIR}/TIME_CHECK_EOSIO_SYSTEM_v3.7.0.JSON | jq 1> /dev/null
 if [ $? != 0 ]; then
-    echo "ERROR: invalid JSON for EOSIO_SYSTEM_v3.7.0.JSON EXITING"
+    echo "ERROR: invalid JSON for TIME_CHECK_EOSIO_SYSTEM_v3.7.0.JSON EXITING"
     exit
 fi
 eosc -u $ENDPOINT multisig propose $ACCOUNT enfsys.erm \
-    ${ACTIONS_DIR}/EOSIO_SYSTEM_v3.7.0.JSON \
+    ${ACTIONS_DIR}/TIME_CHECK_EOSIO_SYSTEM_v3.7.0.JSON \
     --request-producers --vault-file $HOME/eosio-wallet/.eosc-vault-${ACCOUNT}.json
 

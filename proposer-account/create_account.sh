@@ -5,8 +5,14 @@ CREATOR=enf
 PROPER_NAME=$(echo $ACCOUNT | cut -d'.' -f1)
 ENDPOINT=http://127.0.0.1:8888
 MSIG_PROP_ACCOUNT=spaceranger1
-NETWORK=${1:-LOCAL}
-PUB_KEY=$(grep Public $HOME/eosio-wallet/${ACCOUNT}-local.keys | cut -d: -f2 | sed 's/\s//')
+CHAIN=${1:-LOCAL}
+if [ $CHAIN == "LOCAL" ]; then 
+    CHAIN = "-local"
+else 
+    if
+fi
+
+PUB_KEY=$(grep Public $HOME/eosio-wallet/${ACCOUNT}${CHAIN}.keys | cut -d: -f2 | sed 's/\s//')
 
 if [ $NETWORK == "JUNGLE" ]; then
   ENDPOINT=https://jungle4.cryptolions.io:443
