@@ -43,4 +43,8 @@ Enter passphrase to decrypt your vault:
 
 Transaction submitted to the network.
   https://eosq.app/tx/05b407ea38bcdae1c4cd38a8d761a99ae5000bea2661e9214c59fe920c4b1a70
-  
+
+ ➜  cleos --url $ENDPOINT multisig cancel $ACCOUNT enfsys.ric $ACCOUNT
+executed transaction: e2b319d202ba6a74e00c0830f96ce5d2a5ff93099ada19e8a1eaf9eab581a1d6  120 bytes  1504 us
+#    eosio.msig <= eosio.msig::cancel           {"proposer":"proposer.enf","proposal_name":"enfsys.ric","canceler":"proposer.enf"}
+warning: transaction executed locally, but may not be confirmed by the network yet         ] 
