@@ -1,5 +1,10 @@
 #!/bin/env bash
 
+CHAIN=${1:-LOCAL}
+if [ $CHAIN == "LOCAL" ]; then 
+    CHAIN="-local"
+fi
+
 cat ./eosio-wallet/finality-test-network-wallet.pw | cleos wallet unlock -n finality-test-network-wallet
 cat > $HOME/required_auth.json << EOF
 {
@@ -33,8 +38,8 @@ cat > $HOME/required_auth.json << EOF
 EOF
 cleos set account permission eosio active $HOME/required_auth.json
 
-ACCOUNT=spaceranger1
-PUB_KEY=$(grep Public ~/eosio-wallet/${ACCOUNT}.keys | cut -d: -f2 | sed 's/\s//')
+ACCOUNT=proposer.enf
+PUB_KEY=$(grep Public ~/eosio-wallet/${ACCOUNT}${CHAIN}.keys | cut -d: -f2 | sed 's/\s//')
 cat > $HOME/required_auth2.json << EOF
 {
   "threshold": 1,
@@ -46,7 +51,7 @@ cat > $HOME/required_auth2.json << EOF
   "accounts": [
     {
       "permission": {
-        "actor": "spaceranger1",
+        "actor": "proposer.enf",
         "permission": "active"
       },
       "weight": 1
@@ -55,4 +60,4 @@ cat > $HOME/required_auth2.json << EOF
   "waits": []
 }
 EOF
-cleos set account permission spaceranger1 active $HOME/required_auth2.json
+cleos set account permission $ACCOUNT active $HOME/required_auth2.json

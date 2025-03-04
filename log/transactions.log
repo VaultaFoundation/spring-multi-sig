@@ -1,50 +1,8 @@
-enfuser@ffddc136c749:/local/eosnetworkfoundation/repos/spring-multi-sig$ eosc -u $ENDPOINT multisig propose $ACCOUNT enfsys.erm     ${ACTIONS_DIR}/TIME_CHECK_EOSIO_SYSTEM_v3.7.0.JSON     --request-producers --vault-file $HOME/eosio-wallet/.eosc-vault-${ACCOUNT}.json
-Adding no. 1: binancestake@active
-Adding no. 2: aus1genereos@active
-Adding no. 3: eosnationftw@active
-Adding no. 4: eosphereiobp@active
-Adding no. 5: eostitanprod@active
-Adding no. 6: big.one@active
-Adding no. 7: bp.defi@active
-Adding no. 8: ivote4eosusa@active
-Adding no. 9: atticlabeosb@active
-Adding no. 10: newdex.bp@active
-Adding no. 11: eoscannonchn@active
-Adding no. 12: eoseouldotio@active
-Adding no. 13: starteosiobp@active
-Adding no. 14: hashfineosio@active
-Adding no. 15: teamgreymass@active
-Adding no. 16: eosflytomars@active
-Adding no. 17: eosiodetroit@active
-Adding no. 18: eosiosg11111@active
-Adding no. 19: eossupportbp@active
-Adding no. 20: eoslaomaocom@active
-Adding no. 21: bp.daobox@active
-Adding no. 22: alohaeosprod@active
-Adding no. 23: eosriobrazil@active
-Adding no. 24: eosasia11111@active
-Adding no. 25: eosauthority@active
-Adding no. 26: slowmistiobp@active
-Adding no. 27: blockpooleos@active
-Adding no. 28: eoslambdacom@active
-Adding no. 29: cryptolions1@active
-Adding no. 30: noaharkeosbp@active
-Adding no. 31: eosinfstones@active
-Adding no. 32: truststaking@active
-Adding no. 33: eosamsterdam@active
-Adding no. 34: eosnewfuture@active
-Adding no. 35: bitfinexeos1@active
-Adding no. 36: bp4dex223dao@active
-Adding no. 37: eosdotwikibp@active
-Adding no. 38: eossv12eossv@active
-Adding no. 39: eoseyes.com@active
-Adding no. 40: passpay.io@active
-Enter passphrase to decrypt your vault: 
+CANCELED JUNGLE System Contract V3.8.0
 
 Transaction submitted to the network.
-  https://eosq.app/tx/05b407ea38bcdae1c4cd38a8d761a99ae5000bea2661e9214c59fe920c4b1a70
+  28dd241a68f91f49f1334dcc28b774bc77b848ba57e152317e9d0dd432f5959a
 
- ➜  cleos --url $ENDPOINT multisig cancel $ACCOUNT enfsys.ric $ACCOUNT
-executed transaction: e2b319d202ba6a74e00c0830f96ce5d2a5ff93099ada19e8a1eaf9eab581a1d6  120 bytes  1504 us
-#    eosio.msig <= eosio.msig::cancel           {"proposer":"proposer.enf","proposal_name":"enfsys.ric","canceler":"proposer.enf"}
-warning: transaction executed locally, but may not be confirmed by the network yet         ] 
+JUNGLE System Contract v.3.8.0 with Add Deny Hash
+Transaction submitted to the network.
+  8a81de0988c2f22889ddc45d356a675dc4972beb6ff40639316801177dfd305c

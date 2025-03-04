@@ -7,9 +7,7 @@ ENDPOINT=http://127.0.0.1:8888
 MSIG_PROP_ACCOUNT=spaceranger1
 CHAIN=${1:-LOCAL}
 if [ $CHAIN == "LOCAL" ]; then 
-    CHAIN = "-local"
-else 
-    if
+    CHAIN="-local"
 fi
 
 PUB_KEY=$(grep Public $HOME/eosio-wallet/${ACCOUNT}${CHAIN}.keys | cut -d: -f2 | sed 's/\s//')
@@ -32,12 +30,6 @@ if [ $NETWORK == "MAINNET" ]; then
   $HOME/eosio-wallet/${ACCOUNT}.keys
 fi
 
-if [ ! -s $KEYS ]; then
-  echo "Can not find $KEYS"
-  exit
-fi
-
-PUB_KEY=$(grep Public $KEYS | cut -d: -f2 | sed 's/\s//')
 cat > ./${PROPER_NAME}_active_auth.json << EOF
 {
     "threshold": 1,
