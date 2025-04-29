@@ -1,0 +1,40 @@
+
+eosc -u https://jungle4.cryptolions.io:443 multisig propose proposer.enf enfsys.blk ./actions/EOSIO_SYSTEM_v3.8.0_HASH_ADD.JSON \
+--request eosio \
+ --request lioninjungle@active \
+ --request ohtigertiger@active \
+ --request eosphereiobp@active \
+ --request eosriobrazil@active \
+ --request alohaeostest@active \
+ --request eosamsterdam@active \
+ --request atticlabeosb@active \
+ --request eosarabianet@active \
+ --request ivote4eosusa@active \
+ --request eoseouldotio@active \
+ --request eosnationftw@active \
+ --request aus1genereos@active \
+ --request detroitdhole@active \
+ --request gorillapower@active \
+ --request thebluewhale@active \
+ --request jumpingfrogs@active \
+ --request funnyhamster@active \
+ --request hippopotamus@active \
+ --request batinthedark@active \
+ --request bigpolarbear@active \
+ --request proudrooster@active \
+ --request clevermonkey@active \
+ --request hungryolddog@active \
+ --request iliketurtles@active \
+ --request bighornsheep@active \
+ --request wealthyhorse@active \
+ --request thesilentowl@active \
+ --request ssssssssnake@active \
+ --request spideronaweb@active \
+ --request pythoncolors@active \
+ --request soaringeagle@active \
+ --request littlerabbit@active \
+ --request eosdacserval@active \
+ --request junglesweden@active \
+ --request mytestbp1234@active \
+ --request cannonjungle@active \
+--vault-file $HOME/eosio-wallet/.eosc-jvault-proposer.enf.json
