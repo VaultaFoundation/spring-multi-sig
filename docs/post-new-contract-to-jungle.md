@@ -29,7 +29,7 @@ Needed dependancies `eosc`.
 Needed Inputs
 - The Account `ACCOUNT=proposer.enf`
 - The eosc vault file `VAULT="junglevault"`
-- Name of your multi sig. `SIG="enfsys.390"`
+- Name of your multi sig. `SIG="enfsys.per"`
 - Private key for Account `proposer.enf` 
 
 If your `eosc` vault does not exist create it, providing the private key 
