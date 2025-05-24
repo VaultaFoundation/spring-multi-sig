@@ -8,26 +8,35 @@ fi
 cat ./eosio-wallet/finality-test-network-wallet.pw | cleos wallet unlock -n finality-test-network-wallet
 cat > $HOME/required_auth.json << EOF
 {
-  "threshold": 3,
-  "keys": [],
+  "threshold": 2,
+  "keys": [
+    {
+      "key": "EOS5mCN9hNuHieDcGviVNvfCiq6m2KB7cgjSqGTeDmN74s2MwhCpF",
+      "weight": 2
+    },
+    {
+      "key": "EOS77aqrnWUFvjCNxonxGd9vF3LtWCN54dU2NDCa8F2bgP8Ca4xcp",
+      "weight": 2
+    }
+  ],
   "accounts": [
     {
       "permission": {
-        "actor": "bpa",
+        "actor": "eosio.prods",
+        "permission": "active"
+      },
+      "weight": 2
+    },
+    {
+      "permission": {
+        "actor": "eosnationftw",
         "permission": "active"
       },
       "weight": 1
     },
     {
       "permission": {
-        "actor": "bpb",
-        "permission": "active"
-      },
-      "weight": 1
-    },
-    {
-      "permission": {
-        "actor": "bpc",
+        "actor": "ivote4eosusa",
         "permission": "active"
       },
       "weight": 1

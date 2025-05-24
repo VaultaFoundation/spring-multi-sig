@@ -16,19 +16,16 @@ VAULT="lvault"
 
 if [ $NETWORK == "JUNGLE" ]; then
   ENDPOINT=https://jungle4.cryptolions.io:443
-  ACCOUNT=proposer.enf
   VAULT="jvault"
 fi
 
 if [ $NETWORK == "KYLIN" ]; then
   ENDPOINT=https://api.kylin.alohaeos.com
-  ACCOUNT=spacerang.gm
   VAULT="kvault"
 fi
 
 if [ $NETWORK == "MAINNET" ]; then
   ENDPOINT=https://eos.api.eosnation.io
-  ACCOUNT=proposer.enf
 fi
 
 if [ ! -s $HOME/eosio-wallet/.eosc-${VAULT}-${ACCOUNT}.json ]; then

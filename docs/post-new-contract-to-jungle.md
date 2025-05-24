@@ -53,13 +53,13 @@ eosc -u $ENDPOINT multisig propose $ACCOUNT $SIG \
  ```
 
 ### Step 5: Validate MSIG 
-Use the Unicover MSIG tools
+Use the Unicove MSIG tools. Need to sign into Unicove to see the msig
 - https://jungle4.unicove.com/en/jungle4/msig/proposer.enf/${SIG} 
 In this example the URL would be
-- https://jungle4.unicove.com/en/jungle4/msig/proposer.enf/enfsys.390
+- https://jungle4.unicove.com/en/jungle4/msig/proposer.enf/enfsys.per
 
 In production this URL would be
-- https://unicove.com/en/vaulta/msig/proposer.enf/enfsys.390
+- https://unicove.com/en/vaulta/msig/proposer.enf/enfsys.per
 
 ### Cancel on MSIG
 If needed here is how you cancel. Need to add private key for $ACCOUNT to your wallet 

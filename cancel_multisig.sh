@@ -7,7 +7,6 @@ SIG="enfsys.blk"
 
 if [ $NETWORK == "KYLIN" ]; then
   ENDPOINT=https://api.kylin.alohaeos.com
-  ACCOUNT=spacerang.gm
 fi
 
 if [ $NETWORK == "MAINNET" ]; then

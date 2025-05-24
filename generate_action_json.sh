@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 NETWORK=${1:-LOCAL}
-TIME=${2:-"2025-03-05 00:00:00"}
+TIME=${2:-"2026-01-01 00:00:00"}
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 ACTIONS_DIR="${SCRIPT_DIR}/actions"
 [ ! -d $ACTIONS_DIR ] && mkdir -p $ACTIONS_DIR
-CONTRACT_DIR=/local/VaultaFoundation/repos/system-contracts/build/contracts
+CONTRACT_DIR=/local/eosnetworkfoundation/repos/vaulta-system-contract/build/contracts
 TIME_LOCK="NO"
 
 TIME_ACT="eosio.time"
@@ -31,29 +31,24 @@ fi
 # restrict update to a specific time , can not execute before this time
 TIME=$(date -u -d "${TIME}" +"%Y-%m-%dT%H:%M:%S")
 # generate this even if we don't use it 
-cleos -u $ENDPOINT push action $TIME_ACT checktime "[\"${TIME}\"]" -p eosio@active -s -d --json-file ${ACTIONS_DIR}/TIME.JSON --expiration 8640000
+cleos -u $ENDPOINT push action $TIME_ACT checktime "[\"${TIME}\"]" -p eosio@active -s -d --json-file ${ACTIONS_DIR}/TIME_LOCK.JSON --expiration 8640000
+
+# create core vaulta account
+VAULTA_KEY=EOS77aqrnWUFvjCNxonxGd9vF3LtWCN54dU2NDCa8F2bgP8Ca4xcp
+cleos -u $ENDPOINT system newaccount vaulta core.vaulta ${VAULTA_KEY} ${VAULTA_KEY} --stake-net "10.0 EOS" --stake-cpu "10.0 EOS" --buy-ram-kbytes 1000 -pvaulta@active -s -d --json-file ${ACTIONS_DIR}/VAULTA_ACCT.JSON --expiration 8640000
+
+# set code priviledges  
+cleos -u $ENDPOINT set account permission core.vaulta active --add-code -pcore.vaulta@active -s -d --json-file ${ACTIONS_DIR}/VAULTA_ADD_CODE.JSON --expiration 8640000
+
+# EOSIO permission action 
+cleos -u $ENDPOINT push action eosio setpriv '["core.vaulta", 1]' -p eosio@active -s -d --json-file ${ACTIONS_DIR}/VAULTA_PRIV.JSON --expiration 8640000
 
 # SET NEW ABI and SET NEW CODE
 # This is all you need if you are only posting a new contact
-cleos -u $ENDPOINT set contract eosio ${CONTRACT_DIR}/eosio.system eosio.system.wasm eosio.system.abi -s -d \
-     -p eosio@active --expiration 8640000 --json-file ${ACTIONS_DIR}/EOSIO_SYSTEM_v3.9.0.JSON
+cleos -u $ENDPOINT set contract core.vaulta ${CONTRACT_DIR} system.wasm system.abi -p core.vaulta@active -s -d --expiration 8640000 --json-file ${ACTIONS_DIR}/SET_VAULTA_CONTRACT.JSON
 
-jq 'del(.actions[0])' ${ACTIONS_DIR}/TIME.JSON | grep -v '"actions":' | head -n -1 > ${ACTIONS_DIR}/BASE.JSON
-if [ $TIME_LOCK != "NO" ]; then
-    jq .actions[0] ${ACTIONS_DIR}/TIME.JSON > ${ACTIONS_DIR}/ACT0.JSON 
-fi     
-jq .actions[0] ${ACTIONS_DIR}/EOSIO_SYSTEM_v3.9.0.JSON > ${ACTIONS_DIR}/ACT1.JSON
-jq .actions[1] ${ACTIONS_DIR}/EOSIO_SYSTEM_v3.9.0.JSON > ${ACTIONS_DIR}/ACT2.JSON
-cat ${ACTIONS_DIR}/BASE.JSON > ${ACTIONS_DIR}/EOSIO_SYSTEM_v3.9.0.JSON
-echo ',' >> ${ACTIONS_DIR}/EOSIO_SYSTEM_v3.9.0.JSON
-echo '  "actions": [' >> ${ACTIONS_DIR}/EOSIO_SYSTEM_v3.9.0.JSON
-if [ $TIME_LOCK != "NO" ]; then
-    cat  ${ACTIONS_DIR}/ACT0.JSON >> ${ACTIONS_DIR}/EOSIO_SYSTEM_v3.9.0.JSON
-    printf ',' >> ${ACTIONS_DIR}/EOSIO_SYSTEM_v3.9.0.JSON
-fi
-cat  ${ACTIONS_DIR}/ACT1.JSON >> ${ACTIONS_DIR}/EOSIO_SYSTEM_v3.9.0.JSON
-printf ',' >> ${ACTIONS_DIR}/EOSIO_SYSTEM_v3.9.0.JSON
-cat  ${ACTIONS_DIR}/ACT2.JSON >> ${ACTIONS_DIR}/EOSIO_SYSTEM_v3.9.0.JSON
-echo '  ]' >> ${ACTIONS_DIR}/EOSIO_SYSTEM_v3.9.0.JSON
-echo '}' >> ${ACTIONS_DIR}/EOSIO_SYSTEM_v3.9.0_HASH_ADD.JSON
+
+cleos -u $ENDPOINT push action core.vaulta init '["2100000000.0000 A"]' -p core.vaulta@active
+
+
 
